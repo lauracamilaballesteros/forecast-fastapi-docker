@@ -1,17 +1,17 @@
 FROM tiangolo/uvicorn-gunicorn-fastapi:python3.9
 
-RUN apt-get update && apt-get install -y python3-dev build-essential
+COPY app.py /app/
+COPY requirements.txt /app/
+COPY model.joblib /app/
+WORKDIR /app
 
-WORKDIR /app/
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    && rm -rf /var/lib/apt/lists/*
 
-COPY requirements.txt .
-RUN pip3 install -r requirements.txt
+RUN pip install --upgrade pip
+RUN pip install --no-cache-dir -r requirements.txt
 
-COPY . .
+EXPOSE 80
 
-EXPOSE 8000
-
-COPY notebooks/model.joblib /app/
-
-CMD ["uvicorn", "--host", "0.0.0.0", "--port", "8000", "app:app"]
-
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "80"]
