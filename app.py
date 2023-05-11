@@ -6,7 +6,7 @@ import statsmodels.api as sm
 from typing import List
 
 
-filename = 'D:/Github/Proyecto-MLE/forecast-fastapi-docker/notebooks/model.joblib'
+filename = 'D:/Github/Proyecto-MLE/forecast-fastapi-docker/model.joblib'
 clf = joblib.load(filename)
 
 
