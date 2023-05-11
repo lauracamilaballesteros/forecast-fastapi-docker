@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, APIRouter
 from pydantic import BaseModel
 import joblib
 import pandas as pd
@@ -15,9 +15,10 @@ class DataIn(BaseModel):
 
 
 app = FastAPI()
+router = APIRouter()
 
 
-@app.post("/predict")
+@router.post("/predict")
 async def predict(data: DataIn):
     
     df_in = pd.DataFrame(data.fecha, columns=['fecha'])
@@ -36,3 +37,5 @@ async def predict(data: DataIn):
     out = df_out.to_dict(orient='records')
 
     return out
+
+app.include_router(router)

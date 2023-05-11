@@ -18,14 +18,14 @@ def model():
 
 def test_predict_sale_amount(client, model):
     # cargar un conjunto de datos de prueba
-    test_data = pd.read_csv('D:/Github/Proyecto-MLE/forecast-fastapi-docker/notebooks/model/datos-prueba.csv')
+    test_data = [{"fecha": "2009-01-01"}, {"fecha": "2009-01-02"}, {"fecha": "2009-01-03"}]
     expected_result = 100.0 # Valor esperado para comparar con el resultado de la predicción
 
     # enviar una solicitud POST al endpoint de predicción con los datos de prueba
-    response = client.post('/predict', json={'data': test_data.to_dict(orient='records')})
+    response = client.post('/predict', json={'data': test_data})
 
     # verificar que la solicitud tuvo éxito y devolvió un código de estado HTTP 200
     assert response.status_code == 200
 
     # verificar que el resultado de la predicción coincide con el valor esperado
-    assert response.json()[0]['prediction'] == expected_result
+    assert response.json()[0]['ventas_pred'] == expected_result
