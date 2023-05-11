@@ -11,5 +11,7 @@ COPY . .
 
 EXPOSE 8000
 
+COPY notebooks/model.joblib /app/
+
 CMD ["uvicorn", "--host", "0.0.0.0", "--port", "8000", "app:app"]
 
