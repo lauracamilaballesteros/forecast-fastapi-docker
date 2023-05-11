@@ -3,6 +3,8 @@ FROM tiangolo/uvicorn-gunicorn-fastapi:python3.9
 COPY app.py /app/
 COPY requirements.txt /app/
 COPY model.joblib /app/
+
+COPY . /app
 WORKDIR /app
 
 RUN apt-get update && apt-get install -y \
