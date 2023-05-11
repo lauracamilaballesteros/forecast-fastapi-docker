@@ -1,14 +1,15 @@
 FROM tiangolo/uvicorn-gunicorn-fastapi:python3.9
 
-COPY app.py /app/
-COPY requirements.txt /app/
-WORKDIR /app
+RUN apt-get update && apt-get install -y python3-dev build-essential
 
-RUN apt-get update && apt-get install -y \
-    build-essential \
-    && rm -rf /var/lib/apt/lists/*
+WORKDIR /app/
 
-RUN pip install --upgrade pip
-RUN pip install --no-cache-dir -r requirements.txt
+COPY requirements.txt .
+RUN pip3 install -r requirements.txt
 
-CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "80"]
+COPY . .
+
+EXPOSE 8000
+
+CMD ["uvicorn", "--host", "0.0.0.0", "--port", "8000", "app:app"]
+
