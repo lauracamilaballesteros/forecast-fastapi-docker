@@ -13,7 +13,7 @@ def client():
 
 @pytest.fixture
 def model():
-    return joblib.load('D:/Github/Proyecto-MLE/forecast-fastapi-docker/model.joblib')
+    return joblib.load('/app/model.joblib')
 
 
 def test_predict_sale_amount(client, model):

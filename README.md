@@ -11,10 +11,10 @@ la API y se enruta, en la api es donde se realizará la predicción del modelo.
 Para validar la app localmente se tienen estos comandos desde consola:
 
 
-docker build -t fast-api-app5 .
+docker build -t fast-api-app6 .
 
 
-docker run -p 80:80 fast-api-app5
+docker run -p 80:80 fast-api-app7
 
 
 
